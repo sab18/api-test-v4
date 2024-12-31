@@ -10,7 +10,7 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
-credentials_json = os.getenv("CREDENTIALS_JSON3")
+credentials_json = os.getenv("CREDENTIALS_JSON4")
 
 if credentials_json:
     with open("src/credentials.json", "w") as f:
