@@ -13,18 +13,28 @@ from dotenv import load_dotenv
 credentials_json = os.environ.get('CREDENTIALS_JSON_S')
 #credentials_json = os.getenv("CREDENTIALS_JSON4")
 
-if credentials_json:
-    with open("src/credentials.json", "w") as f:
-        f.write(credentials_json)
-else:
-    raise ValueError("CREDENTIALS_JSON_S environment variable is not set")
+print(f'HEREEEEEEEEEEEEEEEEE {credentials_json}')
+
+
+if not credentials_json:
+    raise ValueError("No credentials found in the environment variables.")
+
+# If the secret is a JSON string, parse it
+credentials = json.loads(credentials_json)
+
+# if credentials_json:
+#     with open("src/credentials.json", "w") as f:
+#         f.write(credentials_json)
+# else:
+#     raise ValueError("CREDENTIALS_JSON_S environment variable is not set")
 
 
 
 scopes = ["https://www.googleapis.com/auth/spreadsheets"]
 
 # creds = Credentials.from_service_account_file("src/creds.json", scopes=scopes)
-creds = Credentials.from_service_account_file('src/credentials.json',scopes=scopes)
+# creds = Credentials.from_service_account_file('src/credentials.json',scopes=scopes)
+creds = Credentials.from_service_account_file(credentials,scopes=scopes)
 
 client = gspread.authorize(creds)
 sheet_id = "1Xp3jzJsTYeyJ5dE-uqeB0soCpsEFic2FgQvSO4JJ3zk"
