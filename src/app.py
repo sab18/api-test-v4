@@ -16,7 +16,7 @@ if credentials_json:
     with open("src/credentials.json", "w") as f:
         f.write(credentials_json)
 else:
-    raise ValueError("CREDENTIALS_JSON2 environment variable is not set")
+    raise ValueError("CREDENTIALS_JSON4 environment variable is not set")
 
 
 
