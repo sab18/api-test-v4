@@ -25,13 +25,13 @@ jobs:
 
       - name: Run unit tests
         env:
-          API_KEY: ${{ secrets.CREDENTIALS_JSON_S }}
+          CREDENTIALS_JSON_S: ${{ secrets.CREDENTIALS_JSON_S }}
         run: |
           python -m unittest discover
 
       - name: Check if app starts (optional)
         env:
-          API_KEY: ${{ secrets.CREDENTIALS_JSON_S }}
+          CREDENTIALS_JSON_S: ${{ secrets.CREDENTIALS_JSON_S }}
         run: |
           nohup python app.py &
           sleep 5
