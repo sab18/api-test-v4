@@ -1,38 +1,44 @@
-name: Test Dash App
+name: Test and Deploy Dash App
 
 on:
   push:
     branches:
-      - main
+      - main  # Run the workflow on pushes to the main branch
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout the repository
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Set up Python environment
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: 3.9
 
+      # Install dependencies
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      # Run unit tests with CREDENTIALS_JSON_S
       - name: Run unit tests
         env:
           CREDENTIALS_JSON_S: ${{ secrets.CREDENTIALS_JSON_S }}
         run: |
           python -m unittest discover
 
-      - name: Check if app starts (optional)
-        env:
-          CREDENTIALS_JSON_S: ${{ secrets.CREDENTIALS_JSON_S }}
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test  # Only run this job if the test job succeeds
+
+    steps:
+      # Trigger Render deployment using deploy hook
+      - name: Trigger Render Deployment
         run: |
-          nohup python app.py &
-          sleep 5
-          curl -I http://127.0.0.1:8050
+          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
