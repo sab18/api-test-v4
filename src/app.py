@@ -9,8 +9,8 @@ import json
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
-credentials_json = os.getenv("CREDENTIALS_JSON_S")
+# load_dotenv()
+credentials_json = os.environ.get('CREDENTIALS_JSON_S')
 #credentials_json = os.getenv("CREDENTIALS_JSON4")
 
 if credentials_json:
