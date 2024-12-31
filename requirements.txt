@@ -1,4 +1,0 @@
-dash
-gspread
-google-auth
-python-dotenv
