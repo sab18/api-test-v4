@@ -9,7 +9,6 @@ import json
 import os
 from dotenv import load_dotenv
 
-print(f'LOOOOOOOK {"credentials.json"}')
 
 load_dotenv()
 credentials_json = os.environ.get('CREDENTIALS_JSON_S')
