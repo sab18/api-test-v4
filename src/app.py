@@ -5,27 +5,26 @@ from dash.dependencies import Input, Output, State
 import gspread
 from google.oauth2.service_account import Credentials
 
-
+import json
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
-credentials_json = os.getenv("CREDENTIALS_JSON")
-
+credentials_json = os.getenv("CREDENTIALS_JSON2")
 
 if credentials_json:
-    with open("credentials.json", "w") as f:
+    with open("src/credentials.json", "w") as f:
         f.write(credentials_json)
 else:
-    raise ValueError("CREDENTIALS_JSON environment variable is not set")
+    raise ValueError("CREDENTIALS_JSON2 environment variable is not set")
 
 
 
-scopes = [
-    "https://www.googleapis.com/auth/spreadsheets"
-]
-#creds = Credentials.from_service_account_file("src/credentials.json", scopes=scopes)
-creds = Credentials.from_service_account_file('credentials.json',scopes=scopes)
+scopes = ["https://www.googleapis.com/auth/spreadsheets"]
+
+# creds = Credentials.from_service_account_file("src/creds.json", scopes=scopes)
+creds = Credentials.from_service_account_file('src/credentials.json',scopes=scopes)
+
 client = gspread.authorize(creds)
 sheet_id = "1Xp3jzJsTYeyJ5dE-uqeB0soCpsEFic2FgQvSO4JJ3zk"
 
